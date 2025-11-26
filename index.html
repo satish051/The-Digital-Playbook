@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satish Chandra Karki | The Digital Playbook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Teko:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CORE THEME VARIABLES --- */
+        :root {
+            --bg-main: #0a0a12; /* Deep midnight tech background */
+            --bg-secondary: #141420;
+            --accent-bball: #ff5e00; /* Basketball Orange - Energy */
+            --accent-art: #00f2ff; /* Cyan - Creativity */
+            --accent-tech: #a200ff; /* Purple - Logic/.NET */
+            --text-white: #ffffff;
+            --text-muted: #b3b3b8;
+            --court-lines: rgba(255, 255, 255, 0.08);
+            
+            --font-heading: 'Teko', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            --section-spacing: 100px;
+            --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* --- 2. RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 3. UTILITY CLASSES & ANIMATIONS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .highlight-bball { color: var(--accent-bball); }
+        .highlight-art { color: var(--accent-art); }
+
+        /* The "Fade Up" reveal animation */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s var(--transition-smooth);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Subtle background geometry (The Court) */
+        .court-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, var(--court-lines) 1px, transparent 1px),
+                linear-gradient(to right, var(--court-lines) 1px, transparent 1px);
+            background-size: 50px 50px, 100px 100px;
+            opacity: 0.3;
+        }
+
+        /* --- 4. NAVIGATION --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 18, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--court-lines);
+        }
+
+        .brand {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+
+        .brand span { color: var(--accent-bball); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+        /* The "swish" underline effect */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--accent-bball);
+            transition: width 0.3s var(--transition-smooth);
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- 5. HERO SECTION (The Tip-Off) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        /* The decorative arc behind the text */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -10%;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-bball);
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .hero-intro { color: var(--accent-art); font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+        
+        .hero-title {
+            font-size: 5rem;
+            line-height: 0.9;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .hero-roles {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-family: var(--font-body);
+        }
+
+        .hero-roles .separator { color: var(--accent-bball); margin: 0 10px; }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-bball);
+            color: var(--bg-main);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%); /* Jersey shape */
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px -10px rgba(255, 94, 0, 0.5);
+        }
+
+        /* --- 6. ABOUT SECTION --- */
+        .section-padding { padding: var(--section-spacing) 0; }
+
+        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-title {
+            font-size: 3.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        /* The artistic brush stroke under titles */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 5px; left: -10%; width: 120%; height: 15px;
+            background: var(--accent-art);
+            z-index: -1;
+            opacity: 0.3;
+            transform: skewX(-20deg);
+            clip-path: polygon(0 28%, 100% 0, 96% 78%, 4% 95%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p { margin-bottom: 20px; font-size: 1.1rem; color: var(--text-muted); }
+        .about-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .stat-item h4 { font-size: 2.5rem; color: var(--accent-tech); line-height: 1; }
+        .stat-item p { font-size: 0.9rem; }
+
+        /* --- 7. PLAYBOOK SECTION (Skills) --- */
+        .playbook-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .playbook-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--court-lines);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        /* The "Dribble" hover effect */
+        .playbook-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-bball);
+        }
+        .playbook-card:hover h3 i { color: var(--accent-bball); transform: scale(1.2) rotate(-10deg); }
+
+        .playbook-card h3 { font-size: 2rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+        .playbook-card h3 i { transition: all 0.3s var(--transition-smooth); color: var(--accent-tech); }
+
+        .skill-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        .skill-list li i { color: var(--accent-bball); margin-right: 10px; font-size: 0.8rem;}
+
+        /* --- 8. THE FUSION ZONE (Interests) --- */
+        /* This section visually merges the three interests */
+        .fusion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            height: 400px;
+            margin-top: 50px;
+        }
+
+        .fusion-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-right: 1px solid var(--court-lines);
+            transition: flex 0.5s var(--transition-smooth);
+        }
+
+        .fusion-item:hover { flex: 2; /* Expands on hover */ }
+
+        .fusion-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            transition: opacity 0.5s, transform 0.5s;
+            filter: grayscale(80%);
+        }
+        .fusion-item:hover .fusion-bg { opacity: 0.5; transform: scale(1.1); filter: grayscale(0%); }
+
+        .fusion-content {
+            z-index: 2;
+            text-align: center;
+        }
+        .fusion-icon { font-size: 3rem; margin-bottom: 10px; }
+        .fusion-title { font-size: 1.5rem; }
+
+        /* Specific theme colors for interests */
+        .fi-basketball .fusion-icon, .fi-basketball .fusion-title { color: var(--accent-bball); }
+        .fi-art .fusion-icon, .fi-art .fusion-title { color: var(--accent-art); }
+        .fi-tech .fusion-icon, .fi-tech .fusion-title { color: var(--accent-tech); }
+
+
+        /* --- 9. CONTACT & FOOTER --- */
+        .contact-bar {
+            background: var(--bg-secondary);
+            padding: 50px 0;
+            border-top: 2px solid var(--accent-bball);
+        }
+        .contact-flex {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            text-align: center;
+        }
+        .contact-box i { font-size: 1.8rem; color: var(--accent-bball); margin-bottom: 15px; }
+        .contact-box p, .contact-box a { font-weight: 600; display: block;}
+
+        .social-stadium {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .social-icon {
+            width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid var(--court-lines);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+        /* Physics-based hover effect */
+        .social-icon:hover {
+            border-color: var(--accent-bball);
+            background: var(--accent-bball);
+            transform: translateY(-10px) rotate(360deg);
+            box-shadow: 0 10px 20px rgba(255, 94, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: #050508;
+        }
+
+        /* --- 10. RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+            .nav-links { display: none; } /* Simplified mobile nav */
+            .about-grid, .playbook-container { grid-template-columns: 1fr; }
+            .fusion-grid { grid-template-columns: 1fr; height: auto; }
+            .fusion-item { height: 150px; border-right: none; border-bottom: 1px solid var(--court-lines);}
+            .fusion-item:hover { flex: auto; }
+            .contact-flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="court-bg"></div>
+
+    <nav class="navbar reveal-up">
+        <div class="container navbar" style="position:relative; background:none; border:none; padding:0;">
+            <a href="#" class="brand">SATISH<span>.CK</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">The Profile</a></li>
+                <li><a href="#playbook">The Playbook</a></li>
+                <li><a href="#fusion">Interests</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <p class="hero-intro reveal-up" style="transition-delay: 0.2s;">HELLO, I'M</p>
+            <h1 class="hero-title reveal-up" style="transition-delay: 0.4s;">SATISH CHANDRA <br> <span class="highlight-bball">KARKI</span></h1>
+            <div class="hero-roles reveal-up" style="transition-delay: 0.6s;">
+                .NET Developer <span class="separator"><i class="fas fa-basketball-ball"></i></span> Digital Marketing Executive
+            </div>
+            <a href="#contact" class="cta-btn reveal-up" style="transition-delay: 0.8s;">
+                Get The Scout Report <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2 class="section-title">The Player Profile</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal-up" style="transition-delay: 0.2s;">
+                    <p>I operate at the intersection of <span class="highlight-art">creative strategy</span> and <span class="highlight-tech">technical execution</span>. Based in Kirtipur, Kathmandu, I don't just build software; I ensure it finds its audience.</p>
+                    <p>Like a point guard on the basketball court, I see the whole floor. My .NET background provides the robust backend logic (the defense), while my Digital Marketing expertise drives engagement and conversions (the offense). I believe in elegant code and impactful campaigns.</p>
+                </div>
+                <div class="about-stats reveal-up" style="transition-delay: 0.4s;">
+                    <div class="stat-item">
+                        <h4>Dual</h4>
+                        <p>Expertise Domains</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4><i class="fas fa-map-marker-alt" style="color:var(--accent-bball)"></i></h4>
+                        <p>Kirtipur, Nepal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="playbook" class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2 class="section-title">The Playbook</h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">My Technical & Strategic Arsenal</p>
+            </div>
+
+            <div class="playbook-container">
+                <div class="playbook-card reveal-up" style="transition-delay: 0.2s;">
+                    <h3><i class="fas fa-code"></i> The Backend Defense (.NET)</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> C# Programming</li>
+                        <li><i class="fas fa-check"></i> ASP.NET Core MVC</li>
+                        <li><i class="fas fa-check"></i> Entity Framework / SQL Server</li>
+                        <li><i class="fas fa-check"></i> API Development</li>
+                        <li><i class="fas fa-check"></i> Git Version Control</li>
+                    </ul>
+                </div>
+
+                <div class="playbook-card reveal-up" style="transition-delay: 0.4s;">
+                    <h3><i class="fas fa-bullhorn"></i> The Offensive Drive (Marketing)</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> SEO Strategy (On/Off Page)</li>
+                        <li><i class="fas fa-check"></i> Social Media Management</li>
+                        <li><i class="fas fa-check"></i> Content Marketing Strategy</li>
+                        <li><i class="fas fa-check"></i> Analytics & Data Analysis</li>
+                        <li><i class="fas fa-check"></i> Brand Positioning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fusion" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2 class="section-title">The Fusion Zone</h2>
+                <p style="color: var(--text-muted);">Where my passions converge</p>
+            </div>
+
+            <div class="fusion-grid reveal-up" style="transition-delay: 0.3s;">
+                <div class="fusion-item fi-basketball">
+                    <div class="fusion-bg" style="background-image: url('https://images.unsplash.com/photo-1546519638-68e9c97c27c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');"></div>
+                    <div class="fusion-content">
+                        <i class="fas fa-basketball-ball fusion-icon"></i>
+                        <h3 class="fusion-title">Basketball</h3>
+                        <p style="font-size:0.8rem;">Strategy. Movement. Energy.</p>
+                    </div>
+                </div>
+                 <div class="fusion-item fi-art">
+                    <div class="fusion-bg" style="background-image: url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');"></div>
+                    <div class="fusion-content">
+                        <i class="fas fa-palette fusion-icon"></i>
+                        <h3 class="fusion-title">Art & Aesthetics</h3>
+                        <p style="font-size:0.8rem;">Creativity. Perspective. Design.</p>
+                    </div>
+                </div>
+                 <div class="fusion-item fi-tech">
+                    <div class="fusion-bg" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');"></div>
+                    <div class="fusion-content">
+                        <i class="fas fa-microchip fusion-icon"></i>
+                        <h3 class="fusion-title">Technology</h3>
+                        <p style="font-size:0.8rem;">Logic. Innovation. The Future.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-bar reveal-up">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="font-size: 2.5rem;">Final Buzzer: Connect</h2>
+            </div>
+            
+            <div class="contact-flex">
+                <div class="contact-box">
+                    <i class="fas fa-envelope"></i>
+                    <p>Email Me</p>
+                    <a href="mailto:satishchandrakarki@gmail.com">satishchandrakarki@gmail.com</a>
+                </div>
+                 <div class="contact-box">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>Call Me</p>
+                    <a href="tel:+9779745534752">+977 9745534752</a>
+                </div>
+                 <div class="contact-box">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Location</p>
+                    <span>Kirtipur, Kathmandu, Nepal</span>
+                </div>
+            </div>
+
+            <div class="social-stadium">
+                <a href="https://www.linkedin.com/in/satish-chandra-karki-791b0a20b/" target="_blank" class="social-icon" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/satish051" target="_blank" class="social-icon" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/BABAYAGABIO" target="_blank" class="social-icon" title="X / Twitter">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2023 Satish Chandra Karki. Code meets Creativity. All Rights Reserved.</p>
+    </footer>
+
+
+    <script>
+        // 1. SCROLL REVEAL ANIMATION
+        // This uses the Intersection Observer API to trigger animations
+        // only when elements scroll into the viewport.
+        
+        const revealElements = document.querySelectorAll('.reveal-up');
+
+        const revealOptions = {
+            threshold: 0.15, // Trigger when 15% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Slightly offset the trigger point
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop watching once animated
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+
+
+        // 2. NAVBAR SCROLL EFFECT
+        // Adds a solid background to the navbar when scrolling down.
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 18, 0.95)';
+                navbar.style.padding = '15px 40px';
+                navbar.style.borderBottom = '1px solid var(--accent-bball)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 18, 0.9)';
+                navbar.style.padding = '20px 40px';
+                navbar.style.borderBottom = '1px solid var(--court-lines)';
+            }
+        });
+    </script>
+
+</body>
+</html>
