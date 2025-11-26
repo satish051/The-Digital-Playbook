@@ -25,7 +25,7 @@ Since this is a static site, no installation is required!
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/satish051/your-repo-name.git](https://github.com/satish051/your-repo-name.git)
+    git clone [https://github.com/satish051/The-Digital-Playbook.git](https://github.com/satish051/The-Digital-Playbook.git)
     ```
 2.  **Open the site:**
     Simply double-click `index.html` to open it in your browser.
@@ -53,7 +53,7 @@ This site is ready for **GitHub Pages**.
 3.  Under **Source**, select `Deploy from a branch`.
 4.  Select `main` (or `master`) and `/root`, then click **Save**.
 
-Your site will be live at `https://satish051.github.io/your-repo-name/`.
+Your site will be live at `https://satish051.github.io/The-Digital-Playbook/`.
 
 ## 📫 Connect with Me
 
