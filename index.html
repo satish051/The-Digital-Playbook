@@ -10,11 +10,11 @@
     <style>
         /* --- 1. CORE THEME VARIABLES --- */
         :root {
-            --bg-main: #0a0a12; /* Deep midnight tech background */
+            --bg-main: #0a0a12;
             --bg-secondary: #141420;
-            --accent-bball: #ff5e00; /* Basketball Orange - Energy */
-            --accent-art: #00f2ff; /* Cyan - Creativity */
-            --accent-tech: #a200ff; /* Purple - Logic/.NET */
+            --accent-bball: #ff5e00;
+            --accent-art: #00f2ff;
+            --accent-tech: #a200ff;
             --text-white: #ffffff;
             --text-muted: #b3b3b8;
             --court-lines: rgba(255, 255, 255, 0.08);
@@ -113,7 +113,7 @@
 
         .brand span { color: var(--accent-bball); }
 
-        .nav-links { display: flex; gap: 30px; }
+        .nav-links { display: flex; gap: 30px; align-items: center;}
         .nav-links a {
             font-size: 0.9rem;
             font-weight: 700;
@@ -121,7 +121,7 @@
             position: relative;
             transition: color 0.3s;
         }
-        /* The "swish" underline effect */
+        
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -131,7 +131,18 @@
         }
         .nav-links a:hover::after { width: 100%; }
 
-        /* --- 5. HERO SECTION (The Tip-Off) --- */
+        .resume-btn-nav {
+            border: 1px solid var(--accent-bball);
+            padding: 5px 15px;
+            border-radius: 4px;
+            color: var(--accent-bball) !important;
+        }
+        .resume-btn-nav:hover {
+            background: var(--accent-bball);
+            color: #fff !important;
+        }
+
+        /* --- 5. HERO SECTION --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -145,7 +156,6 @@
             max-width: 800px;
         }
 
-        /* The decorative arc behind the text */
         .hero::before {
             content: '';
             position: absolute;
@@ -184,8 +194,9 @@
             font-size: 1.2rem;
             font-weight: 700;
             text-transform: uppercase;
-            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%); /* Jersey shape */
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
             transition: all 0.3s var(--transition-smooth);
+            cursor: pointer;
         }
 
         .cta-btn:hover {
@@ -195,14 +206,12 @@
 
         /* --- 6. ABOUT SECTION --- */
         .section-padding { padding: var(--section-spacing) 0; }
-
         .section-header { margin-bottom: 60px; text-align: center; }
         .section-title {
             font-size: 3.5rem;
             position: relative;
             display: inline-block;
         }
-        /* The artistic brush stroke under titles */
         .section-title::after {
             content: '';
             position: absolute;
@@ -230,7 +239,7 @@
         .stat-item h4 { font-size: 2.5rem; color: var(--accent-tech); line-height: 1; }
         .stat-item p { font-size: 0.9rem; }
 
-        /* --- 7. PLAYBOOK SECTION (Skills) --- */
+        /* --- 7. PLAYBOOK SECTION --- */
         .playbook-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -246,7 +255,6 @@
             transition: transform 0.3s, border-color 0.3s;
         }
 
-        /* The "Dribble" hover effect */
         .playbook-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-bball);
@@ -264,8 +272,7 @@
         }
         .skill-list li i { color: var(--accent-bball); margin-right: 10px; font-size: 0.8rem;}
 
-        /* --- 8. THE FUSION ZONE (Interests) --- */
-        /* This section visually merges the three interests */
+        /* --- 8. FUSION ZONE --- */
         .fusion-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -283,7 +290,7 @@
             transition: flex 0.5s var(--transition-smooth);
         }
 
-        .fusion-item:hover { flex: 2; /* Expands on hover */ }
+        .fusion-item:hover { flex: 2; }
 
         .fusion-bg {
             position: absolute;
@@ -296,14 +303,10 @@
         }
         .fusion-item:hover .fusion-bg { opacity: 0.5; transform: scale(1.1); filter: grayscale(0%); }
 
-        .fusion-content {
-            z-index: 2;
-            text-align: center;
-        }
+        .fusion-content { z-index: 2; text-align: center; }
         .fusion-icon { font-size: 3rem; margin-bottom: 10px; }
         .fusion-title { font-size: 1.5rem; }
 
-        /* Specific theme colors for interests */
         .fi-basketball .fusion-icon, .fi-basketball .fusion-title { color: var(--accent-bball); }
         .fi-art .fusion-icon, .fi-art .fusion-title { color: var(--accent-art); }
         .fi-tech .fusion-icon, .fi-tech .fusion-title { color: var(--accent-tech); }
@@ -341,7 +344,6 @@
             font-size: 1.5rem;
             transition: all 0.3s var(--transition-smooth);
         }
-        /* Physics-based hover effect */
         .social-icon:hover {
             border-color: var(--accent-bball);
             background: var(--accent-bball);
@@ -357,10 +359,9 @@
             background: #050508;
         }
 
-        /* --- 10. RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
             .hero-title { font-size: 3rem; }
-            .nav-links { display: none; } /* Simplified mobile nav */
+            .nav-links { display: none; }
             .about-grid, .playbook-container { grid-template-columns: 1fr; }
             .fusion-grid { grid-template-columns: 1fr; height: auto; }
             .fusion-item { height: 150px; border-right: none; border-bottom: 1px solid var(--court-lines);}
@@ -381,6 +382,7 @@
                 <li><a href="#playbook">The Playbook</a></li>
                 <li><a href="#fusion">Interests</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="https://drive.google.com/file/d/13zKDL-9171nws8jmtpQJbXOJX45e57hN/view?usp=sharing" target="_blank" class="resume-btn-nav">CV <i class="fas fa-download"></i></a></li>
             </ul>
         </div>
     </nav>
@@ -392,8 +394,9 @@
             <div class="hero-roles reveal-up" style="transition-delay: 0.6s;">
                 .NET Developer <span class="separator"><i class="fas fa-basketball-ball"></i></span> Digital Marketing Executive
             </div>
-            <a href="#contact" class="cta-btn reveal-up" style="transition-delay: 0.8s;">
-                Get The Scout Report <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+            
+            <a href="https://drive.google.com/file/d/13zKDL-9171nws8jmtpQJbXOJX45e57hN/view?usp=sharing" target="_blank" class="cta-btn reveal-up" style="transition-delay: 0.8s;">
+                Get The Scout Report (CV) <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
             </a>
         </div>
     </section>
@@ -513,6 +516,11 @@
                     <p>Location</p>
                     <span>Kirtipur, Kathmandu, Nepal</span>
                 </div>
+                <div class="contact-box">
+                    <i class="fas fa-file-download"></i>
+                    <p>Resume</p>
+                    <a href="https://drive.google.com/file/d/13zKDL-9171nws8jmtpQJbXOJX45e57hN/view?usp=sharing" target="_blank">View PDF</a>
+                </div>
             </div>
 
             <div class="social-stadium">
@@ -533,39 +541,21 @@
         <p>© 2023 Satish Chandra Karki. Code meets Creativity. All Rights Reserved.</p>
     </footer>
 
-
     <script>
-        // 1. SCROLL REVEAL ANIMATION
-        // This uses the Intersection Observer API to trigger animations
-        // only when elements scroll into the viewport.
-        
         const revealElements = document.querySelectorAll('.reveal-up');
-
-        const revealOptions = {
-            threshold: 0.15, // Trigger when 15% of the element is visible
-            rootMargin: "0px 0px -50px 0px" // Slightly offset the trigger point
-        };
-
+        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
         const revealOnScroll = new IntersectionObserver(function(entries, observer) {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
+                if (!entry.isIntersecting) { return; } 
+                else {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Stop watching once animated
+                    observer.unobserve(entry.target);
                 }
             });
         }, revealOptions);
+        revealElements.forEach(el => { revealOnScroll.observe(el); });
 
-        revealElements.forEach(el => {
-            revealOnScroll.observe(el);
-        });
-
-
-        // 2. NAVBAR SCROLL EFFECT
-        // Adds a solid background to the navbar when scrolling down.
         const navbar = document.querySelector('.navbar');
-        
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.style.background = 'rgba(10, 10, 18, 0.95)';
